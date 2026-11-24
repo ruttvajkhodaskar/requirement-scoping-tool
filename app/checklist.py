@@ -2,17 +2,18 @@ from app.schemas import CATEGORIES, ScopingResult
 
 
 def build_checklist(result: ScopingResult) -> str:
-    """Make a simple markdown checklist for the estimating team."""
+    """Markdown checklist for the estimating team."""
     lines = ["# Estimating Checklist", ""]
     for cat in CATEGORIES:
-        items = [r.detail for r in result.requirements if r.category == cat]
-        if items:
-            lines.append(f"- [x] **{cat}**: " + " | ".join(items))
+        items = [r for r in result.requirements if r.category == cat]
+        good = [r for r in items if not r.needs_review]
+        if good:
+            lines.append(f"- [x] **{cat}**: " + " | ".join(r.detail for r in good))
+        elif items:
+            lines.append(f"- [ ] **{cat}**: UNCLEAR, please confirm - " + " | ".join(r.detail for r in items))
         else:
             lines.append(f"- [ ] **{cat}**: MISSING - ask the customer")
     others = [r.detail for r in result.requirements if r.category not in CATEGORIES]
     if others:
-        lines.append("")
-        lines.append("## Other notes")
-        lines += [f"- {o}" for o in others]
+        lines += ["", "## Other notes"] + [f"- {o}" for o in others]
     return "\n".join(lines)

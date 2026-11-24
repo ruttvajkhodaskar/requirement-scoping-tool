@@ -1,5 +1,9 @@
-name: tests
-on: [push, pull_request]
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -8,5 +12,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - run: pytest -q
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - name: Unit and API tests
+        run: pytest -q
+      - name: Extraction quality check (rule mode)
+        run: python -m eval.run_eval --min-f1 0.85
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t scoping-tool .

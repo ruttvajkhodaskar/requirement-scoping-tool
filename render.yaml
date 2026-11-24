@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: requirement-scoping-tool
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_BASE_URL
+        sync: false
+      - key: LLM_MODEL
+        value: gpt-4o-mini
+      - key: CRM_WEBHOOK_URL
+        sync: false
+      - key: CRM_WEBHOOK_SECRET
+        sync: false
