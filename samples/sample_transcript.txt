@@ -1,0 +1,5 @@
+This is a made-up call. Customer: Acme Pumps (fictional).
+We need 500 pieces of a pump housing in the first order.
+The housing should be made of stainless steel 304 and the outer diameter is 120 mm.
+Delivery is needed within 8 weeks of the purchase order.
+The parts must follow ISO 9001 quality rules.
