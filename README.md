@@ -15,7 +15,7 @@ A FastAPI service that reads a **customer call transcript or an RFP (text or PDF
 
 > Demo project. All sample data is made up. No company data or code is inside.
 
-**Live demo:** _add your URL here after deploying (see [docs/DEPLOY.md](docs/DEPLOY.md))_
+**Live demo:** https://requirement-scoping-tool.onrender.com/
 
 ## The problem
 
